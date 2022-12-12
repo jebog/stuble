@@ -1,4 +1,4 @@
-module stuble
+module github.com/jebog/stuble
 
 go 1.19
 

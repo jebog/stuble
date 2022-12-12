@@ -1,10 +1,10 @@
-package controller
+package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	helper "github.com/jebog/stuble/helpers"
+	"github.com/jebog/stuble/models"
 	"net/http"
-	helper "stuble/helpers"
-	"stuble/models"
 )
 
 func Register(context *gin.Context) {

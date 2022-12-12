@@ -1,11 +1,11 @@
 package models
 
 import (
+	"github.com/jebog/stuble/database"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 	"html"
 	"strings"
-	"stuble/database"
 )
 
 type User struct {
@@ -40,6 +40,15 @@ func (user *User) ValidatePassword(password string) error {
 func FindUserByUsername(username string) (User, error) {
 	var user User
 	err := database.Database.Where("username=?", username).Find(&user).Error
+	if err != nil {
+		return User{}, err
+	}
+	return user, nil
+}
+
+func FindUserById(id uint) (User, error) {
+	var user User
+	err := database.Database.Preload("Entries").Where("ID=?", id).Find(&user).Error
 	if err != nil {
 		return User{}, err
 	}
