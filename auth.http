@@ -1,5 +1,5 @@
 ### Register
-POST http://{{base_url}}/auth/register
+POST http://{{base_url}}/register
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Login
-POST http://{{base_url}}/auth/login
+POST http://{{base_url}}/login
 Content-Type: application/json
 
 {

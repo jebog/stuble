@@ -3,10 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	controller "github.com/jebog/stuble/controllers"
 	"github.com/jebog/stuble/database"
-	middlewares "github.com/jebog/stuble/midldlewares"
 	"github.com/jebog/stuble/models"
+	"github.com/jebog/stuble/routes"
 	"github.com/joho/godotenv"
 	"log"
 	"os"
@@ -35,14 +34,9 @@ func loadDatabase() {
 func serveApplication() {
 	router := gin.Default()
 
-	publicRoutes := router.Group("/auth")
-	publicRoutes.POST("/register", controller.Register)
-	publicRoutes.POST("/login", controller.Login)
-
-	protectedRoutes := router.Group("/api")
-	protectedRoutes.Use(middlewares.JWTAuthMiddleware())
-	protectedRoutes.POST("/entry", controller.AddEntry)
-	protectedRoutes.GET("/entry", controller.GetAllEntries)
+	routes.NewUserRoute(router)
+	routes.NewEntryRoute(router)
+	routes.NewAuthRoute(router)
 
 	err := router.Run(os.Getenv("SERVER_PORT"))
 

@@ -7,7 +7,10 @@ import (
 	"net/http"
 )
 
-func Register(context *gin.Context) {
+type AuthController struct {
+}
+
+func (authController AuthController) Register(context *gin.Context) {
 	var input models.AuthenticationInput
 
 	if err := context.ShouldBindJSON(&input); err != nil {
@@ -30,7 +33,7 @@ func Register(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"user": savedUser})
 }
 
-func Login(context *gin.Context) {
+func (authController AuthController) Login(context *gin.Context) {
 	var input models.AuthenticationInput
 
 	if err := context.ShouldBindJSON(&input); err != nil {
