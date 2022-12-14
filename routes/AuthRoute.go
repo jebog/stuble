@@ -10,13 +10,10 @@ import (
 )
 
 type AuthRoute struct {
-	Path string
 }
 
 func NewAuthRoute(route *gin.Engine) {
 
-	h := &AuthRoute{}
-	r := route.Group(h.Path)
-	r.POST("/register", controllers.AuthController{}.Register)
-	r.POST("/login", controllers.AuthController{}.Login)
+	route.POST("/register", controllers.AuthController{}.Register)
+	route.POST("/login", controllers.AuthController{}.Login)
 }

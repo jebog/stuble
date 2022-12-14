@@ -7,6 +7,7 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/jebog/stuble/controllers"
+	"github.com/jebog/stuble/helpers"
 	middlewares "github.com/jebog/stuble/midldlewares"
 )
 
@@ -16,7 +17,7 @@ type UserRoute struct {
 
 func NewUserRoute(route *gin.Engine) {
 
-	h := &UserRoute{}
+	h := &UserRoute{Path: helpers.NewConfig().BasePath}
 
 	r := route.Group(h.Path)
 	r.Use(middlewares.JWTAuthMiddleware())
