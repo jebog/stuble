@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	helper "github.com/jebog/stuble/helpers"
 	"github.com/jebog/stuble/models"
+	"github.com/jebog/stuble/requests"
 	"net/http"
 )
 
@@ -11,7 +12,7 @@ type AuthController struct {
 }
 
 func (authController AuthController) Register(context *gin.Context) {
-	var input models.AuthenticationInput
+	var input requests.AuthenticationInput
 
 	if err := context.ShouldBindJSON(&input); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -34,7 +35,7 @@ func (authController AuthController) Register(context *gin.Context) {
 }
 
 func (authController AuthController) Login(context *gin.Context) {
-	var input models.AuthenticationInput
+	var input requests.AuthenticationInput
 
 	if err := context.ShouldBindJSON(&input); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
