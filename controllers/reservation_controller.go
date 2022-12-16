@@ -7,10 +7,10 @@ import (
 	"net/http"
 )
 
-type EntryController struct {
+type ReservationController struct {
 }
 
-func (entryController EntryController) Get(context *gin.Context) {
+func (controller ReservationController) Get(context *gin.Context) {
 	user, err := helpers.CurrentUser(context)
 
 	if err != nil {
@@ -21,8 +21,8 @@ func (entryController EntryController) Get(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"data": user.Entries})
 }
 
-func (entryController EntryController) Create(context *gin.Context) {
-	var input models.Entry
+func (controller ReservationController) Create(context *gin.Context) {
+	var input models.Reservation
 	if err := context.ShouldBindJSON(&input); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -47,10 +47,10 @@ func (entryController EntryController) Create(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"data": savedEntry})
 }
 
-func (entryController EntryController) Update(context *gin.Context) {
+func (controller ReservationController) Update(context *gin.Context) {
 
 }
 
-func (entryController EntryController) Destroy(context *gin.Context) {
+func (controller ReservationController) Destroy(context *gin.Context) {
 
 }
