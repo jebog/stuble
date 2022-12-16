@@ -32,11 +32,11 @@ func loadDatabase() {
 }
 
 func serveApplication() {
-	router := gin.Default()
+	router := *gin.Default()
 
-	routes.NewUserRoute(router)
-	routes.NewEntryRoute(router)
-	routes.NewAuthRoute(router)
+	routes.NewUserRoute(&router)
+	routes.NewEntryRoute(&router)
+	routes.NewAuthRoute(&router)
 
 	err := router.Run(os.Getenv("SERVER_PORT"))
 
