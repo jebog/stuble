@@ -23,5 +23,5 @@ func NewEntryRoute(route *gin.Engine) {
 	r.GET("/entries", controllers.UserController{}.Get)
 	r.PUT("/entries/create", controllers.UserController{}.Create)
 	r.POST("/entries/update", controllers.UserController{}.Get)
-	r.GET("/entries/{id}", controllers.UserController{}.Destroy)
+	r.GET("/entries/:id", controllers.UserController{}.Destroy)
 }
