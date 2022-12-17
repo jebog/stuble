@@ -18,7 +18,7 @@ func (controller RoomController) Get(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"data": user.Entries})
+	context.JSON(http.StatusOK, gin.H{"data": user.Rooms})
 }
 
 func (controller RoomController) Create(context *gin.Context) {

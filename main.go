@@ -28,7 +28,6 @@ func loadDatabase() {
 	database.Connect()
 
 	database.Database.AutoMigrate(&models.User{})
-	database.Database.AutoMigrate(&models.Entry{})
 	database.Database.AutoMigrate(&models.Media{})
 	database.Database.AutoMigrate(&models.Room{})
 	database.Database.AutoMigrate(&models.Reservation{})

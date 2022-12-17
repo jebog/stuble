@@ -25,6 +25,7 @@ type Room struct {
 	Longitude      float32   `json:"longitude"`
 	UserID         uint
 	User           User
+	Reservation    []Reservation
 }
 
 func NewRoom() *Room {

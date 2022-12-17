@@ -18,7 +18,7 @@ func (controller ReservationController) Get(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"data": user.Entries})
+	context.JSON(http.StatusOK, gin.H{"data": user.Reservations})
 }
 
 func (controller ReservationController) Create(context *gin.Context) {
