@@ -28,6 +28,7 @@ func loadDatabase() {
 	database.Connect()
 
 	database.Database.AutoMigrate(&models.User{})
+	database.Database.AutoMigrate(&models.UserDetails{})
 	database.Database.AutoMigrate(&models.Media{})
 	database.Database.AutoMigrate(&models.Room{})
 	database.Database.AutoMigrate(&models.Reservation{})
@@ -36,11 +37,13 @@ func loadDatabase() {
 }
 
 func serveApplication() {
-	router := *gin.Default()
+	router := gin.Default()
 
-	routes.NewUserRoute(&router)
-	routes.NewEntryRoute(&router)
-	routes.NewAuthRoute(&router)
+	// Route
+	routes.NewAuthRoute(router)
+
+	routes.NewUserRoute(router)
+	routes.NewRoomRoute(router)
 
 	err := router.Run(os.Getenv("SERVER_PORT"))
 

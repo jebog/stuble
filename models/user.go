@@ -14,6 +14,7 @@ type User struct {
 	Password     string `gorm:"size:255;not null;" json:"-"`
 	Reservations []Reservation
 	Rooms        []Room
+	Details      UserDetails
 }
 
 func (user *User) Save() (*User, error) {
@@ -49,7 +50,11 @@ func FindUserByUsername(username string) (User, error) {
 
 func FindUserById(id uint) (User, error) {
 	var user User
-	err := database.Database.Preload("Entries").Where("ID=?", id).Find(&user).Error
+	err := database.Database.Preload("Rooms").
+		Preload("Details").
+		Preload("Reservations").
+		Where("ID=?", id).Find(&user).Error
+
 	if err != nil {
 		return User{}, err
 	}

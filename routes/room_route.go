@@ -11,17 +11,17 @@ import (
 	middlewares "github.com/jebog/stuble/midldlewares"
 )
 
-type EntryRoute struct {
+type RoomRoute struct {
 	Path string
 }
 
-func NewEntryRoute(route *gin.Engine) {
+func NewRoomRoute(route *gin.Engine) {
 
-	h := &EntryRoute{Path: helpers.NewConfig().BasePath}
+	h := &RoomRoute{Path: helpers.NewConfig().BasePath}
 	r := route.Group(h.Path)
 	r.Use(middlewares.JWTAuthMiddleware())
-	r.GET("/entries", controllers.UserController{}.Get)
-	r.PUT("/entries/create", controllers.UserController{}.Create)
-	r.POST("/entries/update", controllers.UserController{}.Get)
-	r.GET("/entries/:id", controllers.UserController{}.Destroy)
+	r.GET("/rooms", controllers.RoomController{}.Get)
+	r.PUT("/rooms/create", controllers.RoomController{}.Create)
+	r.POST("/rooms/update", controllers.RoomController{}.Get)
+	r.GET("/rooms/:id", controllers.RoomController{}.Destroy)
 }
