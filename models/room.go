@@ -40,12 +40,12 @@ func (model *Room) Save() (*Room, error) {
 	return model, nil
 }
 
-func (model2 *Room) Update(model *gorm.Model) {
+func (model *Room) Update() (*Room, error) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (model2 *Room) Delete(model *gorm.Model) {
+func (model *Room) Delete(*Room, error) {
 	//TODO implement me
 	panic("implement me")
 }
