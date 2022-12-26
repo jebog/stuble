@@ -27,12 +27,17 @@ func loadEnv() {
 func loadDatabase() {
 	database.Connect()
 
-	database.Database.AutoMigrate(&models.User{})
-	database.Database.AutoMigrate(&models.UserDetails{})
-	database.Database.AutoMigrate(&models.Media{})
-	database.Database.AutoMigrate(&models.Room{})
-	database.Database.AutoMigrate(&models.Reservation{})
-	database.Database.AutoMigrate(&models.Review{})
+	err := database.Database.AutoMigrate(
+		&models.User{},
+		&models.UserDetails{},
+		&models.Media{},
+		&models.Room{},
+		&models.Reservation{},
+		&models.Review{},
+	)
+	if err != nil {
+		return
+	}
 
 }
 

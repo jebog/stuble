@@ -18,6 +18,6 @@ func NewRoomRoute(route *gin.Engine) {
 	r.Use(middlewares.JWTAuthMiddleware())
 	r.GET("/rooms", controllers.RoomController{}.Get)
 	r.PUT("/rooms/create", controllers.RoomController{}.Create)
-	r.POST("/rooms/update", controllers.RoomController{}.Get)
-	r.GET("/rooms/:id", controllers.RoomController{}.Destroy)
+	r.PATCH("/rooms/update/:id", controllers.RoomController{}.Update)
+	r.DELETE("/rooms/delete", controllers.RoomController{}.Destroy)
 }

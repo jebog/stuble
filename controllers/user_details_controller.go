@@ -5,7 +5,6 @@ import (
 	"github.com/jebog/stuble/database"
 	"github.com/jebog/stuble/helpers"
 	"github.com/jebog/stuble/models"
-	"github.com/jebog/stuble/requests"
 	"net/http"
 )
 
@@ -55,9 +54,9 @@ func (userController UserDetailsController) Create(context *gin.Context) {
 
 func (userController UserDetailsController) Update(context *gin.Context) {
 
-	var input requests.UserDetailsInput
+	var userDetails models.UserDetails
 
-	if err := context.ShouldBindJSON(&input); err != nil {
+	if err := context.ShouldBindJSON(&userDetails); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -69,10 +68,9 @@ func (userController UserDetailsController) Update(context *gin.Context) {
 		return
 	}
 
-	var userDetails models.UserDetails
 	userDetails.UserID = user.ID
 
-	if _, e := userDetails.Update(context.Param("id"), &input); err != nil {
+	if _, e := userDetails.Update(context.Param("id")); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": e.Error()})
 		return
 	}
@@ -90,7 +88,7 @@ func (userController UserDetailsController) Destroy(context *gin.Context) {
 	var userDetails models.UserDetails
 	userDetails.UserID = user.ID
 
-	if e := userDetails.Delete(context.Param("id")); err != nil {
+	if e := userDetails.Delete(user.ID); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": e.Error()})
 		return
 	}

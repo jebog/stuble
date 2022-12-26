@@ -15,7 +15,7 @@ type RoomInput struct {
 	HasHeating     bool      `json:"has_heating" binding:"required"`
 	HasInternet    bool      `json:"has_internet" binding:"required"`
 	Price          bool      `json:"price" binding:"required"`
-	PublishedAt    time.Time `json:"published_at" binding:"required"`
+	PublishedAt    time.Time `json:"published_at"`
 	Latitude       float32   `json:"latitude" binding:"required"`
 	Longitude      float32   `json:"longitude" binding:"required"`
 	UserID         uint      `json:"user_id" binding:"required"`

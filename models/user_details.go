@@ -2,26 +2,25 @@ package models
 
 import (
 	"github.com/jebog/stuble/database"
-	"github.com/jebog/stuble/requests"
 	"gorm.io/gorm"
 )
 
 type UserDetails struct {
 	gorm.Model
-	UserID        uint   `gorm:"omitempty;unique;not null"`
-	FirstName     string `gorm:"size:255;not null;omitempty"`
-	LastName      string `gorm:"size:255;not null;omitempty"`
-	PhoneNumber   string `gorm:"size:255;not null;omitempty"`
-	Description   string `gorm:"type:text;size:500;not null;omitempty"`
-	ProfileImage  string `gorm:"size:255;omitempty"`
-	RememberToken string `gorm:"size:255;omitempty"`
+	UserID        uint   `gorm:"omitempty;unique;not null" json:"user_id"`
+	FirstName     string `gorm:"size:255;not null;omitempty" json:"first_name"`
+	LastName      string `gorm:"size:255;not null;omitempty" json:"last_name"`
+	PhoneNumber   string `gorm:"size:255;not null;omitempty" json:"phone_number"`
+	Description   string `gorm:"type:text;size:500;not null;omitempty" json:"description"`
+	ProfileImage  string `gorm:"size:255;omitempty" json:"profile_image"`
+	RememberToken string `gorm:"size:255;omitempty" json:"remember_token"`
 }
 
 func (u *UserDetails) Get(*UserDetails) []UserDetails {
-	var categories []UserDetails
-	database.Database.Find(&categories)
+	var details []UserDetails
+	database.Database.Find(&details)
 
-	return categories
+	return details
 }
 
 func (u *UserDetails) Save() (*UserDetails, error) {
@@ -32,7 +31,7 @@ func (u *UserDetails) Save() (*UserDetails, error) {
 	return u, err
 }
 
-func (u *UserDetails) Update(param string, input *requests.UserDetailsInput) (*UserDetails, error) {
+func (u *UserDetails) Update(param string) (*UserDetails, error) {
 
 	err := database.Database.First(&u, "id = ? AND user_id = ?", param, u.UserID).Error
 
@@ -40,22 +39,16 @@ func (u *UserDetails) Update(param string, input *requests.UserDetailsInput) (*U
 		return &UserDetails{}, err
 	}
 
-	u.Description = input.Description
-	u.FirstName = input.FirstName
-	u.LastName = input.LastName
-	u.ProfileImage = input.ProfileImage
-
 	database.Database.Save(&u)
 
 	return u, nil
 }
 
-func (u *UserDetails) Delete(param string) error {
+func (u *UserDetails) Delete(id uint) error {
 
-	if err := database.Database.Debug().First(&u, "id = ? AND user_id = ?", param, u.UserID).Error; err != nil {
+	if err := database.Database.Delete(&u, "user_id = ?", id).Error; err != nil {
 		return err
 	}
 
-	database.Database.Debug().Delete(&u)
 	return nil
 }
