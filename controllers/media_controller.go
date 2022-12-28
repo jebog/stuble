@@ -11,6 +11,13 @@ import (
 type MediaController struct {
 }
 
+// Get             godoc
+// @Summary      Get reviews array
+// @Description  Responds with the list of all reviews as JSON.
+// @Tags         reviews
+// @Produce      json
+// @Success      200  {array}  models.Review
+// @Router       /reviews [get]
 func (controller MediaController) Get(context *gin.Context) {
 	_, err := helpers.CurrentUser(context)
 
@@ -29,6 +36,14 @@ func (controller MediaController) Get(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"data": &medias})
 }
 
+// Create             godoc
+// @Summary      Create review object
+// @Description  Responds with the created review as JSON.
+// @Tags         reviews
+// @Produce      json
+// @Param        review  body      models.Review  true  "Review JSON"
+// @Success      200  {object}  models.Review
+// @Router       /reviews/create [put]
 func (controller MediaController) Create(context *gin.Context) {
 	var input models.Media
 	if err := context.ShouldBindJSON(&input); err != nil {
@@ -53,6 +68,14 @@ func (controller MediaController) Create(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"data": savedEntry})
 }
 
+// Update             godoc
+// @Summary      Update review object
+// @Description  Responds with the Updated review as JSON.
+// @Tags         reviews
+// @Produce      json
+// @Param        review  body      models.Review  true  "Review JSON"
+// @Success      200  {object}  models.Review
+// @Router       /reviews/update/:id [patch]
 func (controller MediaController) Update(context *gin.Context) {
 	var media models.Media
 
@@ -76,6 +99,14 @@ func (controller MediaController) Update(context *gin.Context) {
 	context.JSON(http.StatusAccepted, gin.H{"data": &media})
 }
 
+// Destroy             godoc
+// @Summary      Destroy review array
+// @Description  Responds with the created review as JSON.
+// @Tags         reviews
+// @Produce      json
+// @Param		 ID	body		int		true	"Review ID"
+// @Success      200  {object}  models.Review
+// @Router       /reviews/delete [delete]
 func (controller MediaController) Destroy(context *gin.Context) {
 	var media models.Media
 

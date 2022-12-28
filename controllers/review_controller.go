@@ -11,6 +11,13 @@ import (
 type ReviewController struct {
 }
 
+// Get             godoc
+// @Summary      Get reviews array
+// @Description  Responds with the list of all reviews as JSON.
+// @Tags         reviews
+// @Produce      json
+// @Success      200  {array}  models.Review
+// @Router       /reviews [get]
 func (controller ReviewController) Get(context *gin.Context) {
 	_, err := helpers.CurrentUser(context)
 
@@ -29,6 +36,14 @@ func (controller ReviewController) Get(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"data": &reviews})
 }
 
+// Create             godoc
+// @Summary      Create review object
+// @Description  Responds with the created review as JSON.
+// @Tags         reviews
+// @Produce      json
+// @Param        review  body      models.Review  true  "Review JSON"
+// @Success      200  {object}  models.Review
+// @Router       /reviews/create [put]
 func (controller ReviewController) Create(context *gin.Context) {
 	var input models.Review
 	if err := context.ShouldBindJSON(&input); err != nil {
@@ -53,6 +68,14 @@ func (controller ReviewController) Create(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"data": savedEntry})
 }
 
+// Update             godoc
+// @Summary      Update review object
+// @Description  Responds with the Updated review as JSON.
+// @Tags         reviews
+// @Produce      json
+// @Param        review  body      models.Review  true  "Review JSON"
+// @Success      200  {object}  models.Review
+// @Router       /reviews/update/:id [patch]
 func (controller ReviewController) Update(context *gin.Context) {
 	var review models.Review
 
@@ -76,6 +99,14 @@ func (controller ReviewController) Update(context *gin.Context) {
 	context.JSON(http.StatusAccepted, gin.H{"data": &review})
 }
 
+// Destroy             godoc
+// @Summary      Destroy review array
+// @Description  Responds with the created review as JSON.
+// @Tags         reviews
+// @Produce      json
+// @Param		 ID	body		int		true	"Review ID"
+// @Success      200  {object}  models.Review
+// @Router       /reviews/delete [delete]
 func (controller ReviewController) Destroy(context *gin.Context) {
 	var review models.Review
 
