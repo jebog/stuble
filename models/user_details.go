@@ -31,15 +31,11 @@ func (u *UserDetails) Save() (*UserDetails, error) {
 	return u, err
 }
 
-func (u *UserDetails) Update(param string) (*UserDetails, error) {
+func (u *UserDetails) Update() (*UserDetails, error) {
 
-	err := database.Database.First(&u, "id = ? AND user_id = ?", param, u.UserID).Error
-
-	if err != nil {
+	if err := database.Database.Save(&u).Error; err != nil {
 		return &UserDetails{}, err
 	}
-
-	database.Database.Save(&u)
 
 	return u, nil
 }

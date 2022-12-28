@@ -1,6 +1,9 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"github.com/jebog/stuble/database"
+	"gorm.io/gorm"
+)
 
 type Review struct {
 	gorm.Model
@@ -10,21 +13,35 @@ type Review struct {
 	Comment       string
 }
 
-func NewReview(reservation uint, rating uint8, comment string) *Review {
-	return &Review{ReservationID: reservation, Rating: rating, Comment: comment}
+func (u *Review) Get(*Review) []Review {
+	var reviews []Review
+	database.Database.Find(&reviews)
+
+	return reviews
 }
 
-func (r Review) Save(model *gorm.Model) {
-	//TODO implement me
-	panic("implement me")
+func (u *Review) Save() (*Review, error) {
+	err := database.Database.Create(&u).Error
+	if err != nil {
+		return &Review{}, err
+	}
+	return u, err
 }
 
-func (r Review) Update(model *gorm.Model) {
-	//TODO implement me
-	panic("implement me")
+func (u *Review) Update() (*Review, error) {
+
+	if err := database.Database.Save(&u).Error; err != nil {
+		return &Review{}, err
+	}
+
+	return u, nil
 }
 
-func (r Review) Delete(model *gorm.Model) {
-	//TODO implement me
-	panic("implement me")
+func (u *Review) Delete(id uint) error {
+
+	if err := database.Database.Delete(&u, "user_id = ?", id).Error; err != nil {
+		return err
+	}
+
+	return nil
 }

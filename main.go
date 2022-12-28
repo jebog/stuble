@@ -46,10 +46,13 @@ func serveApplication() {
 
 	// Route
 	routes.NewAuthRoute(router)
-
 	routes.NewUserRoute(router)
+
 	routes.NewUserDetailsRoute(router)
 	routes.NewRoomRoute(router)
+	routes.NewReservationRoute(router)
+	routes.NewReviewRoute(router)
+	routes.NewMediaRoute(router)
 
 	err := router.Run(os.Getenv("SERVER_PORT"))
 

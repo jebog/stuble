@@ -8,40 +8,41 @@ import (
 	"net/http"
 )
 
-type UserDetailsController struct {
-	apiVersion string
+type ReviewController struct {
 }
 
-func (userController UserDetailsController) Get(context *gin.Context) {
-	//TODO Add Filters
-	//user, err := helpers.CurrentUser(context)
-
-	var details []models.UserDetails
-
-	if err := database.Database.Find(&details).Error; err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	context.JSON(http.StatusOK, gin.H{"data": details})
-}
-
-func (userController UserDetailsController) Create(context *gin.Context) {
-	var input models.UserDetails
-
-	if err := context.ShouldBindJSON(&input); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	user, err := helpers.CurrentUser(context)
+func (controller ReviewController) Get(context *gin.Context) {
+	_, err := helpers.CurrentUser(context)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	input.UserID = user.ID
+	var reviews []models.Review
+
+	if err := database.Database.Debug().Find(&reviews).Error; err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"data": &reviews})
+}
+
+func (controller ReviewController) Create(context *gin.Context) {
+	var input models.Review
+	if err := context.ShouldBindJSON(&input); err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	_, err := helpers.CurrentUser(context)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
 	savedEntry, err := input.Save()
 
 	if err != nil {
@@ -52,43 +53,45 @@ func (userController UserDetailsController) Create(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"data": savedEntry})
 }
 
-func (userController UserDetailsController) Update(context *gin.Context) {
+func (controller ReviewController) Update(context *gin.Context) {
+	var review models.Review
 
-	var userDetails models.UserDetails
-
-	if err := context.ShouldBindJSON(&userDetails); err != nil {
+	if err := context.ShouldBindJSON(&review); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	user, err := helpers.CurrentUser(context)
+	_, err := helpers.CurrentUser(context)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	userDetails.UserID = user.ID
-
-	if _, e := userDetails.Update(); err != nil {
+	if _, e := review.Update(); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": e.Error()})
 		return
 	}
 
-	context.JSON(http.StatusAccepted, gin.H{"data": &userDetails})
+	context.JSON(http.StatusAccepted, gin.H{"data": &review})
 }
 
-func (userController UserDetailsController) Destroy(context *gin.Context) {
+func (controller ReviewController) Destroy(context *gin.Context) {
+	var review models.Review
+
+	if err := context.ShouldBindJSON(&review); err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
 	user, err := helpers.CurrentUser(context)
+
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	var userDetails models.UserDetails
-	userDetails.UserID = user.ID
-
-	if e := userDetails.Delete(user.ID); err != nil {
+	if e := review.Delete(user.ID); e != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": e.Error()})
 		return
 	}

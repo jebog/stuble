@@ -72,7 +72,7 @@ func (controller RoomController) Update(context *gin.Context) {
 
 	room.UserID = user.ID
 
-	if _, e := room.Update(context.Param("id"), &room); err != nil {
+	if _, e := room.Update(); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": e.Error()})
 		return
 	}

@@ -43,7 +43,7 @@ func (u *Room) Save() (*Room, error) {
 	return u, err
 }
 
-func (u *Room) Update(param string, input *Room) (*Room, error) {
+func (u *Room) Update() (*Room, error) {
 
 	if err := database.Database.Save(&u).Error; err != nil {
 		return &Room{}, err

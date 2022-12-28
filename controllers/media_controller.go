@@ -8,40 +8,41 @@ import (
 	"net/http"
 )
 
-type UserDetailsController struct {
-	apiVersion string
+type MediaController struct {
 }
 
-func (userController UserDetailsController) Get(context *gin.Context) {
-	//TODO Add Filters
-	//user, err := helpers.CurrentUser(context)
-
-	var details []models.UserDetails
-
-	if err := database.Database.Find(&details).Error; err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	context.JSON(http.StatusOK, gin.H{"data": details})
-}
-
-func (userController UserDetailsController) Create(context *gin.Context) {
-	var input models.UserDetails
-
-	if err := context.ShouldBindJSON(&input); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	user, err := helpers.CurrentUser(context)
+func (controller MediaController) Get(context *gin.Context) {
+	_, err := helpers.CurrentUser(context)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	input.UserID = user.ID
+	var medias []models.Media
+
+	if err := database.Database.Debug().Find(&medias).Error; err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"data": &medias})
+}
+
+func (controller MediaController) Create(context *gin.Context) {
+	var input models.Media
+	if err := context.ShouldBindJSON(&input); err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	_, err := helpers.CurrentUser(context)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
 	savedEntry, err := input.Save()
 
 	if err != nil {
@@ -52,43 +53,45 @@ func (userController UserDetailsController) Create(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"data": savedEntry})
 }
 
-func (userController UserDetailsController) Update(context *gin.Context) {
+func (controller MediaController) Update(context *gin.Context) {
+	var media models.Media
 
-	var userDetails models.UserDetails
-
-	if err := context.ShouldBindJSON(&userDetails); err != nil {
+	if err := context.ShouldBindJSON(&media); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	user, err := helpers.CurrentUser(context)
+	_, err := helpers.CurrentUser(context)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	userDetails.UserID = user.ID
-
-	if _, e := userDetails.Update(); err != nil {
+	if _, e := media.Update(); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": e.Error()})
 		return
 	}
 
-	context.JSON(http.StatusAccepted, gin.H{"data": &userDetails})
+	context.JSON(http.StatusAccepted, gin.H{"data": &media})
 }
 
-func (userController UserDetailsController) Destroy(context *gin.Context) {
+func (controller MediaController) Destroy(context *gin.Context) {
+	var media models.Media
+
+	if err := context.ShouldBindJSON(&media); err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
 	user, err := helpers.CurrentUser(context)
+
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	var userDetails models.UserDetails
-	userDetails.UserID = user.ID
-
-	if e := userDetails.Delete(user.ID); err != nil {
+	if e := media.Delete(user.ID); e != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": e.Error()})
 		return
 	}

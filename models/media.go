@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/jebog/stuble/database"
 	"gorm.io/gorm"
 )
 
@@ -12,7 +13,35 @@ type Media struct {
 	MimeType  string `json:"mime_type,omitempty" json:"mime_type"`
 }
 
-func (m Media) FindById(id uint) (interface{}, error) {
-	//TODO implement me
-	panic("implement me")
+func (u *Media) Get(*Media) []Media {
+	var reviews []Media
+	database.Database.Find(&reviews)
+
+	return reviews
+}
+
+func (u *Media) Save() (*Media, error) {
+	err := database.Database.Create(&u).Error
+	if err != nil {
+		return &Media{}, err
+	}
+	return u, err
+}
+
+func (u *Media) Update() (*Media, error) {
+
+	if err := database.Database.Save(&u).Error; err != nil {
+		return &Media{}, err
+	}
+
+	return u, nil
+}
+
+func (u *Media) Delete(id uint) error {
+
+	if err := database.Database.Delete(&u, "user_id = ?", id).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
