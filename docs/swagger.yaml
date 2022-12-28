@@ -1,0 +1,231 @@
+basePath: /api
+definitions:
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  models.Reservation:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      end_date:
+        type: string
+      id:
+        type: integer
+      price:
+        type: number
+      room:
+        $ref: '#/definitions/models.Room'
+      room_id:
+        type: integer
+      start_date:
+        type: string
+      total:
+        type: number
+      updatedAt:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      user_id:
+        type: integer
+    type: object
+  models.Room:
+    properties:
+      address:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      has_air_con:
+        type: boolean
+      has_heating:
+        type: boolean
+      has_internet:
+        type: boolean
+      has_kitchen:
+        type: boolean
+      has_tv:
+        type: boolean
+      home_type:
+        type: string
+      id:
+        type: integer
+      latitude:
+        type: number
+      longitude:
+        type: number
+      price:
+        type: number
+      published_at:
+        type: string
+      reservation:
+        items:
+          $ref: '#/definitions/models.Reservation'
+        type: array
+      room_type:
+        type: string
+      summary:
+        type: string
+      total_bedrooms:
+        type: integer
+      total_occupancy:
+        type: integer
+      updatedAt:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userID:
+        type: integer
+    type: object
+  models.User:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      details:
+        $ref: '#/definitions/models.UserDetails'
+      email:
+        type: string
+      emailVerifiedAt:
+        type: string
+      id:
+        type: integer
+      reservations:
+        items:
+          $ref: '#/definitions/models.Reservation'
+        type: array
+      rooms:
+        items:
+          $ref: '#/definitions/models.Room'
+        type: array
+      updatedAt:
+        type: string
+      username:
+        type: string
+    type: object
+  models.UserDetails:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      description:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: integer
+      last_name:
+        type: string
+      phone_number:
+        type: string
+      profile_image:
+        type: string
+      remember_token:
+        type: string
+      updatedAt:
+        type: string
+      user_id:
+        type: integer
+    type: object
+host: localhost:8000
+info:
+  contact:
+    email: me@marclabs.com
+    name: API Support
+    url: http://www.swagger.io/support
+  description: API for House Rent
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Stuble API
+  version: "1.0"
+paths:
+  /rooms:
+    get:
+      description: Responds with the list of all rooms as JSON.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Room'
+            type: array
+      summary: Get rooms array
+      tags:
+      - rooms
+  /rooms/create:
+    put:
+      description: Responds with the created room as JSON.
+      parameters:
+      - description: Room JSON
+        in: body
+        name: room
+        required: true
+        schema:
+          $ref: '#/definitions/models.Room'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Room'
+      summary: Create room object
+      tags:
+      - rooms
+  /rooms/delete:
+    delete:
+      description: Responds with the created room as JSON.
+      parameters:
+      - description: Room ID
+        in: body
+        name: ID
+        required: true
+        schema:
+          type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Room'
+      summary: Destroy room array
+      tags:
+      - rooms
+  /rooms/update/:id:
+    patch:
+      description: Responds with the Updated room as JSON.
+      parameters:
+      - description: Room JSON
+        in: body
+        name: room
+        required: true
+        schema:
+          $ref: '#/definitions/models.Room'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Room'
+      summary: Update room object
+      tags:
+      - rooms
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"

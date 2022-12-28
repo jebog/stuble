@@ -11,6 +11,13 @@ import (
 type RoomController struct {
 }
 
+// Get             godoc
+// @Summary      Get rooms array
+// @Description  Responds with the list of all rooms as JSON.
+// @Tags         rooms
+// @Produce      json
+// @Success      200  {array}  models.Room
+// @Router       /rooms [get]
 func (controller RoomController) Get(context *gin.Context) {
 	_, err := helpers.CurrentUser(context)
 
@@ -21,7 +28,7 @@ func (controller RoomController) Get(context *gin.Context) {
 
 	var rooms []models.Room
 
-	if err := database.Database.Debug().Find(&rooms).Error; err != nil {
+	if err := database.Database.Find(&rooms).Error; err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -29,6 +36,14 @@ func (controller RoomController) Get(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"data": &rooms})
 }
 
+// Create             godoc
+// @Summary      Create room object
+// @Description  Responds with the created room as JSON.
+// @Tags         rooms
+// @Produce      json
+// @Param        room  body      models.Room  true  "Room JSON"
+// @Success      200  {object}  models.Room
+// @Router       /rooms/create [put]
 func (controller RoomController) Create(context *gin.Context) {
 	var input models.Room
 	if err := context.ShouldBindJSON(&input); err != nil {
@@ -55,6 +70,14 @@ func (controller RoomController) Create(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"data": savedEntry})
 }
 
+// Update             godoc
+// @Summary      Update room object
+// @Description  Responds with the Updated room as JSON.
+// @Tags         rooms
+// @Produce      json
+// @Param        room  body      models.Room  true  "Room JSON"
+// @Success      200  {object}  models.Room
+// @Router       /rooms/update/:id [patch]
 func (controller RoomController) Update(context *gin.Context) {
 	var room models.Room
 
@@ -80,6 +103,14 @@ func (controller RoomController) Update(context *gin.Context) {
 	context.JSON(http.StatusAccepted, gin.H{"data": &room})
 }
 
+// Destroy             godoc
+// @Summary      Destroy room array
+// @Description  Responds with the created room as JSON.
+// @Tags         rooms
+// @Produce      json
+// @Param		 ID	body		int		true	"Room ID"
+// @Success      200  {object}  models.Room
+// @Router       /rooms/delete [delete]
 func (controller RoomController) Destroy(context *gin.Context) {
 	var room models.Room
 
