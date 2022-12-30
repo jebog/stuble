@@ -68,7 +68,7 @@ func (controller MediaController) Create(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"data": savedEntry})
 }
 
-// Update             godoc
+// Update        godoc
 // @Summary      Update review object
 // @Description  Responds with the Updated review as JSON.
 // @Tags         reviews

@@ -35,6 +35,25 @@ definitions:
       user_id:
         type: integer
     type: object
+  models.Review:
+    properties:
+      comment:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      rating:
+        type: integer
+      reservation:
+        $ref: '#/definitions/models.Reservation'
+      reservationID:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
   models.Room:
     properties:
       address:
@@ -150,6 +169,156 @@ info:
   title: Stuble API
   version: "1.0"
 paths:
+  /reservation/update/:id:
+    patch:
+      description: Responds with the Updated Reservation as JSON.
+      parameters:
+      - description: Reservation JSON
+        in: body
+        name: reservation
+        required: true
+        schema:
+          $ref: '#/definitions/models.Reservation'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Reservation'
+      summary: Update Reservation object
+      tags:
+      - reservations
+  /reservations:
+    get:
+      description: Responds with the list of all or filtered reservations as JSON.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Reservation'
+            type: array
+      summary: Get reservations list
+      tags:
+      - reservations
+  /reservations/create:
+    put:
+      description: Responds with the created reservation as JSON.
+      parameters:
+      - description: Reservation JSON
+        in: body
+        name: reservation
+        required: true
+        schema:
+          $ref: '#/definitions/models.Reservation'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Reservation'
+      summary: Create reservation object
+      tags:
+      - reservations
+  /reservations/delete:
+    delete:
+      description: Responds with the created reservation as JSON.
+      parameters:
+      - description: Reservation ID
+        in: body
+        name: ID
+        required: true
+        schema:
+          type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Reservation'
+      summary: Destroy reservation array
+      tags:
+      - reservations
+  /reviews:
+    get:
+      description: Responds with the list of all reviews as JSON.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Review'
+            type: array
+      summary: Get reviews array
+      tags:
+      - reviews
+  /reviews/create:
+    put:
+      description: Responds with the created review as JSON.
+      parameters:
+      - description: Review JSON
+        in: body
+        name: review
+        required: true
+        schema:
+          $ref: '#/definitions/models.Review'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Review'
+      summary: Create review object
+      tags:
+      - reviews
+  /reviews/delete:
+    delete:
+      description: Responds with the created review as JSON.
+      parameters:
+      - description: Review ID
+        in: body
+        name: ID
+        required: true
+        schema:
+          type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Review'
+      summary: Destroy review array
+      tags:
+      - reviews
+  /reviews/update/:id:
+    patch:
+      description: Responds with the Updated review as JSON.
+      parameters:
+      - description: Review JSON
+        in: body
+        name: review
+        required: true
+        schema:
+          $ref: '#/definitions/models.Review'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Review'
+      summary: Update review object
+      tags:
+      - reviews
   /rooms:
     get:
       description: Responds with the list of all rooms as JSON.
@@ -225,6 +394,156 @@ paths:
       summary: Update room object
       tags:
       - rooms
+  /user/details/update/:id:
+    patch:
+      description: Responds with the Updated detail as JSON.
+      parameters:
+      - description: UserDetails JSON
+        in: body
+        name: detail
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserDetails'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserDetails'
+      summary: Update detail object
+      tags:
+      - details
+  /users:
+    get:
+      description: Responds with the list of all users as JSON.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+      summary: Get users array
+      tags:
+      - users
+  /users/create:
+    put:
+      description: Responds with the created user as JSON.
+      parameters:
+      - description: User JSON
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Create user object
+      tags:
+      - users
+  /users/delete:
+    delete:
+      description: Responds with the created user as JSON.
+      parameters:
+      - description: User ID
+        in: body
+        name: ID
+        required: true
+        schema:
+          type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Destroy user array
+      tags:
+      - users
+  /users/details:
+    get:
+      description: Responds with the list of all details as JSON.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.UserDetails'
+            type: array
+      summary: Get details array
+      tags:
+      - details
+  /users/details/create:
+    put:
+      description: Responds with the created detail as JSON.
+      parameters:
+      - description: UserDetails JSON
+        in: body
+        name: detail
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserDetails'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserDetails'
+      summary: Create detail object
+      tags:
+      - details
+  /users/details/delete:
+    delete:
+      description: Responds with the created detail as JSON.
+      parameters:
+      - description: UserDetails ID
+        in: body
+        name: ID
+        required: true
+        schema:
+          type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserDetails'
+      summary: Destroy detail array
+      tags:
+      - details
+  /users/update/:id:
+    patch:
+      description: Responds with the Updated user as JSON.
+      parameters:
+      - description: User JSON
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Update user object
+      tags:
+      - users
 securityDefinitions:
   BasicAuth:
     type: basic
