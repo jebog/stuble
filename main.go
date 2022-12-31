@@ -27,12 +27,17 @@ func loadEnv() {
 func loadDatabase() {
 	database.Connect()
 
-	database.Database.AutoMigrate(&models.User{})
-	database.Database.AutoMigrate(&models.UserDetails{})
-	database.Database.AutoMigrate(&models.Media{})
-	database.Database.AutoMigrate(&models.Room{})
-	database.Database.AutoMigrate(&models.Reservation{})
-	database.Database.AutoMigrate(&models.Review{})
+	err := database.Database.AutoMigrate(
+		&models.User{},
+		&models.UserDetails{},
+		&models.Media{},
+		&models.Room{},
+		&models.Reservation{},
+		&models.Review{},
+	)
+	if err != nil {
+		return
+	}
 
 }
 
@@ -41,9 +46,13 @@ func serveApplication() {
 
 	// Route
 	routes.NewAuthRoute(router)
-
 	routes.NewUserRoute(router)
+
+	routes.NewUserDetailsRoute(router)
 	routes.NewRoomRoute(router)
+	routes.NewReservationRoute(router)
+	routes.NewReviewRoute(router)
+	routes.NewMediaRoute(router)
 
 	err := router.Run(os.Getenv("SERVER_PORT"))
 

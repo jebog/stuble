@@ -8,10 +8,10 @@ import (
 	"net/http"
 )
 
-type ReservationController struct {
+type MediaController struct {
 }
 
-func (controller ReservationController) Get(context *gin.Context) {
+func (controller MediaController) Get(context *gin.Context) {
 	_, err := helpers.CurrentUser(context)
 
 	if err != nil {
@@ -19,31 +19,29 @@ func (controller ReservationController) Get(context *gin.Context) {
 		return
 	}
 
-	var reservations []models.Reservation
+	var medias []models.Media
 
-	if err := database.Database.Debug().Find(&reservations).Error; err != nil {
+	if err := database.Database.Debug().Find(&medias).Error; err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"data": &reservations})
+	context.JSON(http.StatusOK, gin.H{"data": &medias})
 }
 
-func (controller ReservationController) Create(context *gin.Context) {
-	var input models.Reservation
+func (controller MediaController) Create(context *gin.Context) {
+	var input models.Media
 	if err := context.ShouldBindJSON(&input); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	user, err := helpers.CurrentUser(context)
+	_, err := helpers.CurrentUser(context)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
-	input.UserID = user.ID
 
 	savedEntry, err := input.Save()
 
@@ -55,35 +53,33 @@ func (controller ReservationController) Create(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"data": savedEntry})
 }
 
-func (controller ReservationController) Update(context *gin.Context) {
-	var reservation models.Reservation
+func (controller MediaController) Update(context *gin.Context) {
+	var media models.Media
 
-	if err := context.ShouldBindJSON(&reservation); err != nil {
+	if err := context.ShouldBindJSON(&media); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	user, err := helpers.CurrentUser(context)
+	_, err := helpers.CurrentUser(context)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	reservation.UserID = user.ID
-
-	if _, e := reservation.Update(); err != nil {
+	if _, e := media.Update(); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": e.Error()})
 		return
 	}
 
-	context.JSON(http.StatusAccepted, gin.H{"data": &reservation})
+	context.JSON(http.StatusAccepted, gin.H{"data": &media})
 }
 
-func (controller ReservationController) Destroy(context *gin.Context) {
-	var reservation models.Reservation
+func (controller MediaController) Destroy(context *gin.Context) {
+	var media models.Media
 
-	if err := context.ShouldBindJSON(&reservation); err != nil {
+	if err := context.ShouldBindJSON(&media); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -95,7 +91,7 @@ func (controller ReservationController) Destroy(context *gin.Context) {
 		return
 	}
 
-	if e := reservation.Delete(user.ID); e != nil {
+	if e := media.Delete(user.ID); e != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": e.Error()})
 		return
 	}

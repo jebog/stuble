@@ -1,14 +1,10 @@
-// Copyright 2020 Zhaoping Yu.  All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
-
 package routes
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/jebog/stuble/configs"
 	"github.com/jebog/stuble/controllers"
-	"github.com/jebog/stuble/helpers"
-	middlewares "github.com/jebog/stuble/midldlewares"
+	"github.com/jebog/stuble/midldlewares"
 )
 
 type UserRoute struct {
@@ -17,8 +13,7 @@ type UserRoute struct {
 
 func NewUserRoute(route *gin.Engine) {
 
-	h := &UserRoute{Path: helpers.NewConfig().BasePath}
-
+	h := &UserRoute{Path: configs.NewConfig().BasePath}
 	r := route.Group(h.Path)
 	r.Use(middlewares.JWTAuthMiddleware())
 	r.GET("/users", controllers.UserController{}.Get)

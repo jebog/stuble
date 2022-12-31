@@ -6,15 +6,18 @@ import (
 	"gorm.io/gorm"
 	"html"
 	"strings"
+	"time"
 )
 
 type User struct {
 	gorm.Model
-	Username     string `gorm:"size:255;not null;unique" json:"username"`
-	Password     string `gorm:"size:255;not null;" json:"-"`
-	Reservations []Reservation
-	Rooms        []Room
-	Details      UserDetails
+	Username        string        `gorm:"size:255;not null;unique;omitempty" json:"username"`
+	Password        string        `gorm:"size:255;not null;omitempty" json:"-"`
+	Email           string        `gorm:"size:255;not null;unique;omitempty" json:"email"`
+	EmailVerifiedAt time.Time     `gorm:"omitempty"`
+	Reservations    []Reservation `gorm:"omitempty"`
+	Rooms           []Room        `gorm:"omitempty"`
+	Details         UserDetails   `gorm:"omitempty"`
 }
 
 func (user *User) Save() (*User, error) {

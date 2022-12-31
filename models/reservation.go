@@ -18,30 +18,35 @@ type Reservation struct {
 	Total     float32   `json:"total" json:"total,omitempty"`
 }
 
-func NewReservation(model gorm.Model) *Reservation {
-	return &Reservation{Model: model}
+func (u *Reservation) Get(*Reservation) []Reservation {
+	var r []Reservation
+	database.Database.Find(&r)
+
+	return r
 }
 
-func (r *Reservation) Save() (*Reservation, error) {
-	err := database.Database.Create(&r).Error
+func (u *Reservation) Save() (*Reservation, error) {
+	err := database.Database.Create(&u).Error
 	if err != nil {
 		return &Reservation{}, err
 	}
-	return r, nil
+	return u, err
 }
 
-func (r *Reservation) Update() (*Reservation, error) {
-	err := database.Database.Updates(&r).Error
-	if err != nil {
+func (u *Reservation) Update() (*Reservation, error) {
+
+	if err := database.Database.Save(&u).Error; err != nil {
 		return &Reservation{}, err
 	}
-	return r, nil
+
+	return u, nil
 }
 
-func (r *Reservation) Delete() (*Reservation, error) {
-	err := database.Database.Delete(&r).Error
-	if err != nil {
-		return &Reservation{}, err
+func (u *Reservation) Delete(id uint) error {
+
+	if err := database.Database.Delete(&u, "user_id = ?", id).Error; err != nil {
+		return err
 	}
-	return r, nil
+
+	return nil
 }

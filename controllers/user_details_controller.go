@@ -8,29 +8,27 @@ import (
 	"net/http"
 )
 
-type ReservationController struct {
+type UserDetailsController struct {
+	apiVersion string
 }
 
-func (controller ReservationController) Get(context *gin.Context) {
-	_, err := helpers.CurrentUser(context)
+func (userController UserDetailsController) Get(context *gin.Context) {
+	//TODO Add Filters
+	//user, err := helpers.CurrentUser(context)
 
-	if err != nil {
+	var details []models.UserDetails
+
+	if err := database.Database.Find(&details).Error; err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	var reservations []models.Reservation
-
-	if err := database.Database.Debug().Find(&reservations).Error; err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	context.JSON(http.StatusOK, gin.H{"data": &reservations})
+	context.JSON(http.StatusOK, gin.H{"data": details})
 }
 
-func (controller ReservationController) Create(context *gin.Context) {
-	var input models.Reservation
+func (userController UserDetailsController) Create(context *gin.Context) {
+	var input models.UserDetails
+
 	if err := context.ShouldBindJSON(&input); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -44,7 +42,6 @@ func (controller ReservationController) Create(context *gin.Context) {
 	}
 
 	input.UserID = user.ID
-
 	savedEntry, err := input.Save()
 
 	if err != nil {
@@ -55,10 +52,11 @@ func (controller ReservationController) Create(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"data": savedEntry})
 }
 
-func (controller ReservationController) Update(context *gin.Context) {
-	var reservation models.Reservation
+func (userController UserDetailsController) Update(context *gin.Context) {
 
-	if err := context.ShouldBindJSON(&reservation); err != nil {
+	var userDetails models.UserDetails
+
+	if err := context.ShouldBindJSON(&userDetails); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -70,32 +68,27 @@ func (controller ReservationController) Update(context *gin.Context) {
 		return
 	}
 
-	reservation.UserID = user.ID
+	userDetails.UserID = user.ID
 
-	if _, e := reservation.Update(); err != nil {
+	if _, e := userDetails.Update(); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": e.Error()})
 		return
 	}
 
-	context.JSON(http.StatusAccepted, gin.H{"data": &reservation})
+	context.JSON(http.StatusAccepted, gin.H{"data": &userDetails})
 }
 
-func (controller ReservationController) Destroy(context *gin.Context) {
-	var reservation models.Reservation
-
-	if err := context.ShouldBindJSON(&reservation); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
+func (userController UserDetailsController) Destroy(context *gin.Context) {
 	user, err := helpers.CurrentUser(context)
-
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	if e := reservation.Delete(user.ID); e != nil {
+	var userDetails models.UserDetails
+	userDetails.UserID = user.ID
+
+	if e := userDetails.Delete(user.ID); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": e.Error()})
 		return
 	}

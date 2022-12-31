@@ -8,44 +8,55 @@ import (
 
 type Room struct {
 	gorm.Model
-	HomeType       string    `json:"home_type"`
-	RoomType       string    `json:"room_type"`
-	TotalOccupancy uint8     `json:"total_occupancy"`
-	TotalBedrooms  uint8     `json:"total_bedrooms"`
-	Summary        string    `gorm:"size:255" json:"summary"`
-	Address        string    `gorm:"size:255" json:"address"`
-	HasTV          bool      `json:"has_tv"`
-	HasKitchen     bool      `json:"has_kitchen"`
-	HasAirCon      bool      `json:"has_air_con"`
-	HasHeating     bool      `json:"has_heating"`
-	HasInternet    bool      `json:"has_internet"`
-	Price          float32   `json:"price"`
-	PublishedAt    time.Time `json:"published_at"`
-	Latitude       float32   `json:"latitude"`
-	Longitude      float32   `json:"longitude"`
+	HomeType       string    `json:"home_type,omitempty"`
+	RoomType       string    `json:"room_type,omitempty"`
+	TotalOccupancy uint8     `gorm:"default:1" json:"total_occupancy,omitempty"`
+	TotalBedrooms  uint8     `gorm:"default:1" json:"total_bedrooms,omitempty"`
+	Summary        string    `gorm:"size:255" json:"summary,omitempty"`
+	Address        string    `gorm:"size:255" json:"address,omitempty"`
+	HasTV          *bool     `gorm:"default:false" json:"has_tv,omitempty"`
+	HasKitchen     *bool     `gorm:"default:false" json:"has_kitchen,omitempty"`
+	HasAirCon      *bool     `gorm:"default:false" json:"has_air_con,omitempty"`
+	HasHeating     *bool     `gorm:"default:false" json:"has_heating,omitempty"`
+	HasInternet    *bool     `gorm:"default:false" json:"has_internet,omitempty"`
+	Price          float32   `json:"price,omitempty"`
+	PublishedAt    time.Time `json:"published_at,omitempty"`
+	Latitude       float32   `gorm:"default:0" json:"latitude,omitempty"`
+	Longitude      float32   `gorm:"default:0" json:"longitude,omitempty"`
 	UserID         uint
 	User           User
 	Reservation    []Reservation
 }
 
-func NewRoom() *Room {
-	return &Room{}
+func (u *Room) Get(*Room) []Room {
+	var rooms []Room
+	database.Database.Find(&rooms)
+
+	return rooms
 }
 
-func (model *Room) Save() (*Room, error) {
-	err := database.Database.Create(&model).Error
+func (u *Room) Save() (*Room, error) {
+	err := database.Database.Create(&u).Error
 	if err != nil {
 		return &Room{}, err
 	}
-	return model, nil
+	return u, err
 }
 
-func (model2 *Room) Update(model *gorm.Model) {
-	//TODO implement me
-	panic("implement me")
+func (u *Room) Update() (*Room, error) {
+
+	if err := database.Database.Save(&u).Error; err != nil {
+		return &Room{}, err
+	}
+
+	return u, nil
 }
 
-func (model2 *Room) Delete(model *gorm.Model) {
-	//TODO implement me
-	panic("implement me")
+func (u *Room) Delete(id uint) error {
+
+	if err := database.Database.Delete(&u, "user_id = ?", id).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
