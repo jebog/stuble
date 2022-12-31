@@ -2,8 +2,8 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/jebog/stuble/configs"
 	"github.com/jebog/stuble/controllers"
-	"github.com/jebog/stuble/helpers"
 	middlewares "github.com/jebog/stuble/midldlewares"
 )
 
@@ -13,7 +13,7 @@ type ReviewRoute struct {
 
 func NewReviewRoute(route *gin.Engine) {
 
-	h := &ReviewRoute{Path: helpers.NewConfig().BasePath}
+	h := &ReviewRoute{Path: configs.NewConfig().BasePath}
 	r := route.Group(h.Path)
 	r.Use(middlewares.JWTAuthMiddleware())
 	r.GET("/reviews", controllers.ReviewController{}.Get)
