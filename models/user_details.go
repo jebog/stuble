@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/jebog/stuble/database"
 	"gorm.io/gorm"
+	"time"
 )
 
 type UserDetails struct {
