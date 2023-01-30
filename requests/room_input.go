@@ -3,6 +3,7 @@ package requests
 import "time"
 
 type RoomInput struct {
+	RoomName       string	 `json:"room_name" binding: "required"`
 	HomeType       string    `json:"home_type" binding:"required"`
 	RoomType       string    `json:"room_type" binding:"required"`
 	TotalOccupancy string    `json:"total_occupancy" binding:"required"`
