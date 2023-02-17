@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/jebog/stuble/database"
 	"github.com/jebog/stuble/models"
@@ -43,6 +44,8 @@ func loadDatabase() {
 
 func serveApplication() {
 	router := gin.Default()
+
+	router.Use(cors.Default())
 
 	// Route
 	routes.NewAuthRoute(router)

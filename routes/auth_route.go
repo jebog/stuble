@@ -10,6 +10,6 @@ type AuthRoute struct {
 
 func NewAuthRoute(route *gin.Engine) {
 
-	route.POST("/register", controllers.AuthController{}.Register)
-	route.POST("/login", controllers.AuthController{}.Login)
+	route.POST("/api/register", controllers.AuthController{}.Register)
+	route.POST("/api/login", controllers.AuthController{}.Login)
 }
