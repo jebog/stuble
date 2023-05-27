@@ -10,6 +10,9 @@
 *.dll
 *.so
 *.dylib
+*.http
+.idea
+.env
 
 # Test binary, built with `go test -c`
 *.test
@@ -19,4 +22,5 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
->>>>>>> 560a403 (Initial commit)
+
+>>>>>>> babfc44 (ignore files)
