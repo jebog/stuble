@@ -5,22 +5,6 @@ volumes:
 
 
 services:
-  keycloak:
-    image: quay.io/keycloak/keycloak:legacy
-    container_name: keycloak
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_USER: devops
-      DB_SCHEMA: public
-      DB_PASSWORD: devops
-      KEYCLOAK_USER: devops
-      KEYCLOAK_PASSWORD: devops
-    ports:
-      - "8001:8080"
-
-
   postgres:
     build:
       context: ./.docker/postgres

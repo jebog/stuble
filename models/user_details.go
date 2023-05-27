@@ -14,7 +14,7 @@ type UserDetails struct {
 	PhoneNumber   string `gorm:"size:255;not null;omitempty" json:"phone_number"`
 	Description   string `gorm:"type:text;size:500;not null;omitempty" json:"description"`
 	ProfileImage  string `gorm:"size:255;omitempty" json:"profile_image"`
-	RememberToken string `gorm:"size:255;omitempty" json:"remember_token"`
+	RememberToken string `gorm:"size:255;omitempty" json:"-"`
 }
 
 func (u *UserDetails) Get(*UserDetails) []UserDetails {
