@@ -8,7 +8,7 @@ import (
 
 type Room struct {
 	gorm.Model
-	RomeName	   string    `json:"room_name,omitempty"`
+	RoomName       string    `json:"room_name,omitempty"`
 	HomeType       string    `json:"home_type,omitempty"`
 	RoomType       string    `json:"room_type,omitempty"`
 	TotalOccupancy uint8     `gorm:"default:1" json:"total_occupancy,omitempty"`
@@ -30,14 +30,13 @@ type Room struct {
 }
 
 // Eager loading of rooms when find users
-func (u *Room) Preload(*Room) []Room {
+/*func (u *Room) Preload(*Room) []Room {
 	var users []User
 	var rooms []Room
 	database.Database.Preload(&u).Find(&users)
 
 	return rooms
-}
-
+}*/
 
 func (u *Room) Get(*Room) []Room {
 	var rooms []Room
