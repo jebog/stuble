@@ -20,7 +20,7 @@ func (authController AuthController) Register(context *gin.Context) {
 	}
 
 	user := models.User{
-		Username: input.Username,
+		Email:    input.Email,
 		Password: input.Password,
 	}
 
@@ -42,7 +42,7 @@ func (authController AuthController) Login(context *gin.Context) {
 		return
 	}
 
-	user, err := models.FindUserByUsername(input.Username)
+	user, err := models.FindUserByEmail(input.Email)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -63,7 +63,7 @@ func (authController AuthController) Login(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, gin.H{
-		"token":    jwt,
-		"username": user.Username,
+		"token": jwt,
+		"user":  user.Details,
 	})
 }
