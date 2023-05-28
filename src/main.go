@@ -20,7 +20,7 @@ func main() {
 }
 
 func loadEnv() {
-	err := godotenv.Load(".env")
+	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
@@ -57,6 +57,7 @@ func serveApplication() {
 	routes.NewReviewRoute(router)
 	routes.NewMediaRoute(router)
 
+	// Prometheus Metrics handler
 	router.GET("/metrics", prometheusHandler())
 
 	err := router.Run(os.Getenv("SERVER_PORT"))
