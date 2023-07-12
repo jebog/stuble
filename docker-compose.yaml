@@ -5,22 +5,6 @@ volumes:
 
 
 services:
-  keycloak:
-    image: quay.io/keycloak/keycloak:legacy
-    container_name: keycloak
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_USER: devops
-      DB_SCHEMA: public
-      DB_PASSWORD: devops
-      KEYCLOAK_USER: devops
-      KEYCLOAK_PASSWORD: devops
-    ports:
-      - "8001:8080"
-
-
   postgres:
     build:
       context: ./.docker/postgres
@@ -32,3 +16,13 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  backend-stuble:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+     - postgres

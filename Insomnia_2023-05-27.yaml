@@ -1,0 +1,924 @@
+_type: export
+__export_format: 4
+__export_date: 2023-05-27T09:07:32.915Z
+__export_source: insomnia.desktop.app:v2022.7.5
+resources:
+  - _id: req_10eea181f9cd4924bfaedf8adfa3d985
+    parentId: fld_d99eccf9b7044b6b9434d5c3b8305c0d
+    modified: 1671603639152
+    created: 1671127346674
+    url: "{{ _.baseurl }}/users/details"
+    name: Get
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127346674
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_d99eccf9b7044b6b9434d5c3b8305c0d
+    parentId: wrk_f9bcd1e5fe544d0ba94f2579308bc015
+    modified: 1671603377790
+    created: 1671127343642
+    name: UsersDetails
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1671127343642
+    _type: request_group
+  - _id: wrk_f9bcd1e5fe544d0ba94f2579308bc015
+    parentId: null
+    modified: 1671002259629
+    created: 1671002259629
+    name: Stuble
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_96cc1a7ec804462a9bccca8be8b6e16b
+    parentId: fld_d99eccf9b7044b6b9434d5c3b8305c0d
+    modified: 1672033749932
+    created: 1671602627653
+    url: "{{ _.baseurl }}/users/details/create"
+    name: Create
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"user_id": 1,
+        		"first_name": "Jean-Marc",
+        		"last_name": "Amon",
+        		"phone_number": "0675069198",
+        		"description": "Cool",
+        		"profile_image": "Test",
+        		"email_verified_at": "2022-12-21T07:53:03.462+01:00",
+        		"remember_token": ""
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127244630.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d828677c2b65487e8d337a6b7386d7bc
+    parentId: fld_d99eccf9b7044b6b9434d5c3b8305c0d
+    modified: 1672034312397
+    created: 1671603423247
+    url: "{{ _.baseurl }}/users/details/update/2"
+    name: Update
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        		"user_id": 1,
+        		"first_name": "JeanMarc",
+        		"last_name": "Amon",
+        		"phone_number": "0675069198",
+        		"description": "Cool",
+        		"profile_image": "Test2"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127193608.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_859af1ce6f2d4940a274c5248014acf9
+    parentId: fld_d99eccf9b7044b6b9434d5c3b8305c0d
+    modified: 1671956609255
+    created: 1671956594463
+    url: "{{ _.baseurl }}/users/details/delete/2"
+    name: Delete
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        		"UserId": 1,
+        		"FirstName": "Jean-Marc",
+        		"LastName": "Amon",
+        		"PhoneNumber": "0675069198",
+        		"Description": "Cool",
+        		"ProfileImage": "Test",
+        	  "Email": "bogninin@mail.com",
+        		"EmailVerifiedAt": "2022-12-21T07:53:03.462+01:00",
+        		"RememberToken": ""
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127168097.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2e1229551b8d4819a748038ba1489b87
+    parentId: fld_c469dcb274cf4b58a30862a5f90095ab
+    modified: 1672002912080
+    created: 1672002898957
+    url: "{{ _.baseurl }}/rooms"
+    name: Get
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127346674
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_c469dcb274cf4b58a30862a5f90095ab
+    parentId: wrk_f9bcd1e5fe544d0ba94f2579308bc015
+    modified: 1672002898955
+    created: 1672002898955
+    name: Rooms
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1671064832597
+    _type: request_group
+  - _id: req_ab4ec3abe2d5401596b7a7ad506a40c4
+    parentId: fld_c469dcb274cf4b58a30862a5f90095ab
+    modified: 1672034388480
+    created: 1672002898960
+    url: "{{ _.baseurl }}/rooms/create"
+    name: Create
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"user_id": 1,
+        		"home_type": "Jean-Marc",
+        		"room_type": "Amon",
+        		"total_occupancy": 1,
+        		"total_": "Cool",
+        		"summary": "Test",
+        		"address": "Cocody",
+        		"has_tv": true,
+        		"has_kitchen": false,
+        		"has_air_con": true,
+        		"has_heating": true,
+        		"has_internet": true,
+        		"price": 1000.00,
+        		"latitude": 0.65,
+        		"longitude": 0.98
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127244630.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_6af52ec2ae894b779538807580ec0b29
+    parentId: fld_c469dcb274cf4b58a30862a5f90095ab
+    modified: 1672034435020
+    created: 1672002898962
+    url: "{{ _.baseurl }}/rooms/update/3"
+    name: Update
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"user_id": 1,
+        		"home_type": "Jean-Marc",
+        		"room_type": "Amon",
+        		"total_occupancy": 1,
+        		"total_": "Cool",
+        		"summary": "Test",
+        		"address": "Cocody",
+        		"has_tv": true,
+        		"has_kitchen": false,
+        		"has_air_con": true,
+        		"has_heating": true,
+        		"has_internet": false,
+        		"price": 2000.00,
+        		"latitude": 0.00,
+        		"longitude": 0.98
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127193608.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5581bf756ee54b5ab58ee086751e83ca
+    parentId: fld_c469dcb274cf4b58a30862a5f90095ab
+    modified: 1672035290717
+    created: 1672002898963
+    url: "{{ _.baseurl }}/rooms/delete"
+    name: Delete
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        		"ID": 8
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127168097.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f9221e38c9bf43e38028d44d234a43ed
+    parentId: fld_21cddc387e034f43873dce0a59172913
+    modified: 1672378118834
+    created: 1672208701151
+    url: "{{ _.baseurl }}/reservations"
+    name: Get
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127346674
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_21cddc387e034f43873dce0a59172913
+    parentId: wrk_f9bcd1e5fe544d0ba94f2579308bc015
+    modified: 1672208701148
+    created: 1672208701148
+    name: Reservations
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1671033577074.5
+    _type: request_group
+  - _id: req_16a14c8a5cf74177a3a32c0ef5d7c54b
+    parentId: fld_21cddc387e034f43873dce0a59172913
+    modified: 1672378590909
+    created: 1672208701153
+    url: "{{ _.baseurl }}/reservations/create"
+    name: Create
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"user_id": 1,
+        		"room_id": 7,
+        		"start_date": "2021-02-02T00:00:00Z",
+        		"end_date": "2021-02-02T00:00:00Z",
+        		"price": 3,
+        		"total": 1000
+
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127244630.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c11e8b8a6617496d8651a7ca8fa5d3b6
+    parentId: fld_21cddc387e034f43873dce0a59172913
+    modified: 1672378712582
+    created: 1672208701154
+    url: "{{ _.baseurl }}/reservations/update/1"
+    name: Update
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"user_id": 1,
+        		"room_id": 7,
+        		"start_date": "2021-02-02T00:00:00Z",
+        		"end_date": "2021-02-03T00:00:00Z",
+        		"price": 3,
+        		"total": 1000
+
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127193608.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_cebb433f630f490db927db119ec2bea5
+    parentId: fld_21cddc387e034f43873dce0a59172913
+    modified: 1672378822561
+    created: 1672208701156
+    url: "{{ _.baseurl }}/reservations/delete"
+    name: Delete
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        		"ID": 3
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127168097.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7ec20c3a99354023921d741ac82c60e3
+    parentId: fld_27ecc92040fb4f5194c1305a4bd62852
+    modified: 1672378854513
+    created: 1672208716448
+    url: "{{ _.baseurl }}/reviews"
+    name: Get
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127346674
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_27ecc92040fb4f5194c1305a4bd62852
+    parentId: wrk_f9bcd1e5fe544d0ba94f2579308bc015
+    modified: 1672208716447
+    created: 1672208716447
+    name: Reviews
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1671017949313.25
+    _type: request_group
+  - _id: req_3fa26d767ff5487092f08ff36b490aeb
+    parentId: fld_27ecc92040fb4f5194c1305a4bd62852
+    modified: 1674592248831
+    created: 1672208716450
+    url: "{{ _.baseurl }}/reviews/create"
+    name: Create
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"user_id": 1,
+        		"home_type": "Jean-Marc",
+        		"room_type": "Amon",
+        		"total_occupancy": 1,
+        		"total_": "Cool",
+        		"summary": "Test",
+        		"address": "Cocody",
+        		"has_tv": true,
+        		"has_kitchen": false,
+        		"has_air_con": true,
+        		"has_heating": true,
+        		"has_internet": true,
+        		"price": 1000.00,
+        		"latitude": 0.65,
+        		"longitude": 0.98
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127244630.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_31891ac2f4344cba8dfb0919f4dd2db7
+    parentId: fld_27ecc92040fb4f5194c1305a4bd62852
+    modified: 1674592253854
+    created: 1672208716452
+    url: "{{ _.baseurl }}/reviews/update/3"
+    name: Update
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"user_id": 1,
+        		"home_type": "Jean-Marc",
+        		"room_type": "Amon",
+        		"total_occupancy": 1,
+        		"total_": "Cool",
+        		"summary": "Test",
+        		"address": "Cocody",
+        		"has_tv": true,
+        		"has_kitchen": false,
+        		"has_air_con": true,
+        		"has_heating": true,
+        		"has_internet": false,
+        		"price": 2000.00,
+        		"latitude": 0.00,
+        		"longitude": 0.98
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127193608.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_13386233224b4cb3af300cf0b168a4c7
+    parentId: fld_27ecc92040fb4f5194c1305a4bd62852
+    modified: 1674592257201
+    created: 1672208716454
+    url: "{{ _.baseurl }}/reviews/delete"
+    name: Delete
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        		"ID": 8
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127168097.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_579ee0b64228457badc5f9a479d3c045
+    parentId: fld_d05bf886268c44c4938283ac1d96bb96
+    modified: 1672378090258
+    created: 1672208727765
+    url: "{{ _.baseurl }}/medias"
+    name: Get
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127346674
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_d05bf886268c44c4938283ac1d96bb96
+    parentId: wrk_f9bcd1e5fe544d0ba94f2579308bc015
+    modified: 1672208727763
+    created: 1672208727763
+    name: Medias
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1671010135432.625
+    _type: request_group
+  - _id: req_610ccd1ddac34f89b77e254f64a92320
+    parentId: fld_d05bf886268c44c4938283ac1d96bb96
+    modified: 1672208727768
+    created: 1672208727768
+    url: "{{ _.baseurl }}/rooms/create"
+    name: Create
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"user_id": 1,
+        		"home_type": "Jean-Marc",
+        		"room_type": "Amon",
+        		"total_occupancy": 1,
+        		"total_": "Cool",
+        		"summary": "Test",
+        		"address": "Cocody",
+        		"has_tv": true,
+        		"has_kitchen": false,
+        		"has_air_con": true,
+        		"has_heating": true,
+        		"has_internet": true,
+        		"price": 1000.00,
+        		"latitude": 0.65,
+        		"longitude": 0.98
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127244630.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f18303c4e4474040bad19819ad4ca7cc
+    parentId: fld_d05bf886268c44c4938283ac1d96bb96
+    modified: 1672208727770
+    created: 1672208727770
+    url: "{{ _.baseurl }}/rooms/update/3"
+    name: Update
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"user_id": 1,
+        		"home_type": "Jean-Marc",
+        		"room_type": "Amon",
+        		"total_occupancy": 1,
+        		"total_": "Cool",
+        		"summary": "Test",
+        		"address": "Cocody",
+        		"has_tv": true,
+        		"has_kitchen": false,
+        		"has_air_con": true,
+        		"has_heating": true,
+        		"has_internet": false,
+        		"price": 2000.00,
+        		"latitude": 0.00,
+        		"longitude": 0.98
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127193608.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f56f4546e61249b48cf75991fd8af2c2
+    parentId: fld_d05bf886268c44c4938283ac1d96bb96
+    modified: 1672208727772
+    created: 1672208727772
+    url: "{{ _.baseurl }}/rooms/delete"
+    name: Delete
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        		"ID": 8
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.access_token }}"
+    metaSortKey: -1671127168097.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_15553206d2bf40bdb49f8596c4af5a16
+    parentId: fld_df9c1cf4fa1c4c7a89c4c277474749cb
+    modified: 1671127149671
+    created: 1671127142587
+    url: ""
+    name: Register
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1671127142587
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_df9c1cf4fa1c4c7a89c4c277474749cb
+    parentId: wrk_f9bcd1e5fe544d0ba94f2579308bc015
+    modified: 1671002321552
+    created: 1671002321552
+    name: Auth
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1671002321552
+    _type: request_group
+  - _id: req_449dc13d66cf4b34889fe930c9a0094a
+    parentId: fld_df9c1cf4fa1c4c7a89c4c277474749cb
+    modified: 1676634832267
+    created: 1671002322899
+    url: "{{public_url}}/api/login"
+    name: Login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "bogninin@gmail.com",
+        	"password": "devops"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1671002322899
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1cc63da6384f4eabaa7f021a4994b7ad
+    parentId: fld_df9c1cf4fa1c4c7a89c4c277474749cb
+    modified: 1671520255137
+    created: 1671520242174
+    url: "{{public_url}}/login"
+    name: LoginKeycloak
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "devops",
+        	"password": "devops"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1669066100546.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_2532773d08bc144ddfbdb056ddd2369cb86b480a
+    parentId: wrk_f9bcd1e5fe544d0ba94f2579308bc015
+    modified: 1671002268240
+    created: 1671002259633
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: {}
+    color: null
+    isPrivate: false
+    metaSortKey: 1671002259633
+    _type: environment
+  - _id: jar_2532773d08bc144ddfbdb056ddd2369cb86b480a
+    parentId: wrk_f9bcd1e5fe544d0ba94f2579308bc015
+    modified: 1671002865648
+    created: 1671002259634
+    name: Default Jar
+    cookies:
+      - key: KEYCLOAK_LOCALE
+        expires: 1970-01-01T00:00:10.000Z
+        maxAge: 0
+        domain: localhost
+        path: /auth/realms/stuble/
+        httpOnly: true
+        extensions:
+          - Version=1
+          - Comment=Expiring cookie
+        hostOnly: true
+        creation: 2022-12-14T07:27:45.644Z
+        lastAccessed: 2022-12-14T07:27:45.644Z
+        id: "45712284079217524"
+      - key: KC_RESTART
+        expires: 1970-01-01T00:00:10.000Z
+        maxAge: 0
+        domain: localhost
+        path: /auth/realms/stuble/
+        httpOnly: true
+        extensions:
+          - Version=1
+        hostOnly: true
+        creation: 2022-12-14T07:27:45.644Z
+        lastAccessed: 2022-12-14T07:27:45.644Z
+        id: "5609715084573867"
+    _type: cookie_jar
+  - _id: spc_d2f4cd2bf09641f6a97c58b61f9a139c
+    parentId: wrk_f9bcd1e5fe544d0ba94f2579308bc015
+    modified: 1671002259630
+    created: 1671002259630
+    fileName: Stuble
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_9e266d5e94fa4567b492ff53ffaab1d7
+    parentId: env_2532773d08bc144ddfbdb056ddd2369cb86b480a
+    modified: 1671129609419
+    created: 1671002272100
+    name: dev
+    data:
+      keycloak_url: http://localhost:8001
+      baseurl: http://localhost:8000/api
+      public_url: http://localhost:8000
+      access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlYXQiOjE2NzExMzE1NzgsImlhdCI6MTY3MTEyOTU3OCwiaWQiOjF9._rezs9WaDKIbw_zeVChA38KfqDZPRdr_nNnizMNN7d8
+    dataPropertyOrder:
+      "&":
+        - keycloak_url
+        - baseurl
+        - public_url
+        - access_token
+    color: null
+    isPrivate: false
+    metaSortKey: 1671002272100
+    _type: environment

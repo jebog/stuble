@@ -11,13 +11,12 @@ import (
 
 type User struct {
 	gorm.Model
-	Username        string        `gorm:"size:255;not null;unique;omitempty" json:"username"`
-	Password        string        `gorm:"size:255;not null;omitempty" json:"-"`
-	Email           string        `gorm:"size:255;not null;unique;omitempty" json:"email"`
-	EmailVerifiedAt time.Time     `gorm:"omitempty"`
-	Reservations    []Reservation `gorm:"omitempty"`
-	Rooms           []Room        `gorm:"omitempty"`
-	Details         UserDetails   `gorm:"omitempty"`
+	Password        string `gorm:"size:255;not null;omitempty" json:"-"`
+	Email           string `gorm:"size:255;not null;unique;"`
+	EmailVerifiedAt time.Time
+	Reservations    *[]Reservation
+	Rooms           *[]Room
+	Details         *UserDetails
 }
 
 func (user *User) Save() (*User, error) {
@@ -34,7 +33,7 @@ func (user *User) BeforeSave(*gorm.DB) error {
 		return err
 	}
 	user.Password = string(passwordHash)
-	user.Username = html.EscapeString(strings.TrimSpace(user.Username))
+	user.Email = html.EscapeString(strings.TrimSpace(user.Email))
 	return nil
 }
 
@@ -45,6 +44,17 @@ func (user *User) ValidatePassword(password string) error {
 func FindUserByUsername(username string) (User, error) {
 	var user User
 	err := database.Database.Where("username=?", username).Find(&user).Error
+	if err != nil {
+		return User{}, err
+	}
+	return user, nil
+}
+
+func FindUserByEmail(email string) (User, error) {
+	var user User
+	err := database.Database.Where("email=?", email).
+		Preload("Details").
+		Find(&user).Error
 	if err != nil {
 		return User{}, err
 	}

@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jebog/stuble/configs"
 	"github.com/jebog/stuble/controllers"
-	"github.com/jebog/stuble/midldlewares"
+	middlewares "github.com/jebog/stuble/midldlewares"
 )
 
 type UserDetailsRoute struct {
